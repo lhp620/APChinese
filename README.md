@@ -46,5 +46,9 @@ Did you notice a typo in a Chinese character? Would you like to add more "Story 
 We enthusiastically welcome pull requests, bug fixes, or new question additions from teachers, tutors, and developers!  
 **[🐛 File a Bug Report or Suggestion here](https://github.com/lhp620/APChinese/issues)**
 
+## ☕ Support
+If you find this free educational simulator useful and want to help support the continuous expansion of the learning database, please consider buying me a coffee!  
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/lllstudio)
+
 ## ⚖️ Disclaimer
 *AP® is a registered trademark of the College Board, which was not involved in the production of, and does not endorse, this product.* 
