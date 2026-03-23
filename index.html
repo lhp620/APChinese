@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AP Chinese Language and Culture Exam Preparation - Practice listening, reading, writing, speaking, vocabulary, and cultural knowledge">
+  <title>AP中文备考 | AP Chinese Exam Prep</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="main-nav">
+    <a class="nav-brand" onclick="navigateTo('dashboard')">
+      <span class="brand-icon">🏮</span>
+      <span>AP<span class="brand-cn">中文</span>Prep</span>
+    </a>
+    <button class="nav-hamburger" id="nav-toggle" onclick="toggleMobileNav()">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><button class="nav-link active" data-page="dashboard" onclick="navigateTo('dashboard')">首页 Home</button></li>
+      <li><button class="nav-link" data-page="listening" onclick="navigateTo('listening')">听力 Listening</button></li>
+      <li><button class="nav-link" data-page="reading" onclick="navigateTo('reading')">阅读 Reading</button></li>
+      <li><button class="nav-link" data-page="writing" onclick="navigateTo('writing')">写作 Writing</button></li>
+      <li><button class="nav-link" data-page="speaking" onclick="navigateTo('speaking')">口语 Speaking</button></li>
+      <li><button class="nav-link" data-page="vocabulary" onclick="navigateTo('vocabulary')">词汇 Vocab</button></li>
+      <li><button class="nav-link" data-page="culture" onclick="navigateTo('culture')">文化 Culture</button></li>
+      <li><button class="nav-link" data-page="mockexam" onclick="navigateTo('mockexam')">模考 Mock</button></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="page-section active" id="page-dashboard">
+      <div class="container">
+        <div class="hero">
+          <h1>AP中文备考中心</h1>
+          <p>Your complete preparation hub for the AP Chinese Language and Culture exam. Practice all four skills — Listening, Reading, Writing, and Speaking.</p>
+          
+          <div class="exam-countdown" id="countdown">
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-days">--</div>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-hours">--</div>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-mins">--</div>
+              <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-unit">
+              <div class="countdown-number" id="countdown-secs">--</div>
+              <div class="countdown-label">Seconds</div>
+            </div>
+          </div>
+          <div class="exam-date-picker">
+            <label>📅 Set your AP exam date:</label>
+            <input type="date" id="exam-date-input" onchange="setExamDate(this.value)">
+          </div>
+        </div>
+
+        <div class="section-cards" id="dashboard-cards">
+          <!-- Cards injected by JS -->
+        </div>
+
+        <div class="stats-row" id="stats-row">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Questions Answered</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-correct">0%</div>
+            <div class="stat-label">Accuracy Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-streak">0</div>
+            <div class="stat-label">Day Streak 🔥</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-vocab">0</div>
+            <div class="stat-label">Words Mastered</div>
+          </div>
+        </div>
+
+        <div class="backup-section glass-card" style="margin-top:var(--space-xl); text-align:center; padding:var(--space-md)">
+          <h3 style="font-family:'Noto Sans SC',sans-serif;margin-bottom:var(--space-sm)">💾 Backup & Restore Progress</h3>
+          <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:var(--space-md)">
+            Your progress is saved directly to this browser. Export a backup to prevent data loss or move to another device.
+          </p>
+          <div style="display:flex;gap:var(--space-md);justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="exportProgress()">📥 Export Backup</button>
+            <label class="btn btn-secondary" style="cursor:pointer;display:inline-flex;align-items:center;padding:0.6rem 1.2rem;border-radius:var(--radius-md);font-weight:600">
+              📤 Import Backup
+              <input type="file" id="import-backup-input" style="display:none" accept=".json" onchange="importProgress(event)">
+            </label>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>AP中文备考 © 2026 | Built with ❤️ to help students succeed</p>
+          <p style="margin-top:4px; font-size:0.7rem">AP® is a registered trademark of the College Board</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LISTENING ===== -->
+    <section class="page-section" id="page-listening">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">🎧</span>
+          <div>
+            <h2>听力练习</h2>
+            <p class="page-subtitle">Listening Practice — 25% of AP Exam</p>
+          </div>
+        </div>
+        <div id="listening-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== READING ===== -->
+    <section class="page-section" id="page-reading">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">📖</span>
+          <div>
+            <h2>阅读练习</h2>
+            <p class="page-subtitle">Reading Practice — 25% of AP Exam</p>
+          </div>
+        </div>
+        <div id="reading-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== WRITING ===== -->
+    <section class="page-section" id="page-writing">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">✍️</span>
+          <div>
+            <h2>写作练习</h2>
+            <p class="page-subtitle">Writing Practice — 25% of AP Exam</p>
+          </div>
+        </div>
+        <div id="writing-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== SPEAKING ===== -->
+    <section class="page-section" id="page-speaking">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">🎤</span>
+          <div>
+            <h2>口语练习</h2>
+            <p class="page-subtitle">Speaking Practice — 25% of AP Exam</p>
+          </div>
+        </div>
+        <div id="speaking-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== VOCABULARY ===== -->
+    <section class="page-section" id="page-vocabulary">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">📝</span>
+          <div>
+            <h2>词汇与汉字</h2>
+            <p class="page-subtitle">Vocabulary & Characters</p>
+          </div>
+        </div>
+        <div id="vocabulary-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== CULTURE ===== -->
+    <section class="page-section" id="page-culture">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">🏯</span>
+          <div>
+            <h2>文化知识</h2>
+            <p class="page-subtitle">Cultural Knowledge</p>
+          </div>
+        </div>
+        <div id="culture-content"></div>
+      </div>
+    </section>
+
+    <!-- ===== MOCK EXAM ===== -->
+    <section class="page-section" id="page-mockexam">
+      <div class="container">
+        <div class="page-header">
+          <span class="page-header-icon">📋</span>
+          <div>
+            <h2>模拟考试</h2>
+            <p class="page-subtitle">Full Mock Exam Simulation</p>
+          </div>
+        </div>
+        <div id="mockexam-content"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts: Data first, then modules -->
+  <script src="data/reading-data.js"></script>
+  <script src="data/vocabulary-data.js"></script>
+  <script src="data/culture-data.js"></script>
+  <script src="data/listening-data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/listening.js"></script>
+  <script src="js/reading.js"></script>
+  <script src="js/writing.js"></script>
+  <script src="js/speaking.js"></script>
+  <script src="js/vocabulary.js"></script>
+  <script src="js/culture.js"></script>
+  <script src="js/mockexam.js"></script>
+</body>
+</html>
