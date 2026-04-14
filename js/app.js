@@ -22,11 +22,13 @@ const AppState = {
   },
 
   save() {
-    localStorage.setItem('ap-chinese-progress', JSON.stringify({
+    const data = {
       progress: this.progress,
       stats: this.stats,
       examDate: this.examDate
-    }));
+    };
+    localStorage.setItem('ap-chinese-progress', JSON.stringify(data));
+    if (typeof window.onProgressSaved === 'function') window.onProgressSaved(data);
   },
 
   recordAnswer(correct) {
@@ -264,13 +266,13 @@ window.exportProgress = function() {
 window.importProgress = function(event) {
   const file = event.target.files[0];
   if (!file) return;
-  
+
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
       const content = e.target.result;
       const data = JSON.parse(content);
-      
+
       if (data.progress && data.stats) {
         localStorage.setItem('ap-chinese-progress', JSON.stringify(data));
         alert('Progress imported successfully! The page will now reload.');
@@ -285,3 +287,9 @@ window.importProgress = function(event) {
   };
   reader.readAsText(file);
 };
+
+// Re-initialize from localStorage when cloud sync overwrites local data
+window.addEventListener('progress:synced', () => {
+  AppState.init();
+  navigateTo(AppState.currentPage, false);
+});
